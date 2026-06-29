@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.8"
+name = "tiff2fits"
+description = "Converts grayscale Tag Image File Format (.tif or .tiff) files to flexible image transport system (.fits) files."
+version = "0.1.0"
+dependencies = [
+    "astropy>=7.1.0",
+    "numpy>=2.4.6",
+    "Pillow>=12.2.0",
+]
+authors = [
+    {name = "Carson Bantz", email = "bantzcarson@gmail.com"},
+    ]
+maintainers = [
+    {name = "Carson Bantz", email = "bantzcarson@gmail.com"},
+]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["tiff", "tif", "fits", "converter", "image", "astronomy"]
+[project.urls]
+Repository = "https://github.com/Cbantz/BMP2FITS.git"
+[project.scripts]
+tiff2fits = "tiff2fits.tiff2fits:main"
+
