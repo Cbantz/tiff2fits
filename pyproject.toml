@@ -2,6 +2,9 @@
 requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+include = ["tiff2fits*"]
+
 [project]
 requires-python = ">=3.8"
 name = "tiff2fits"

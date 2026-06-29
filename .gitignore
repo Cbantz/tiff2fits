@@ -1,4 +1,6 @@
-*__pycache__/*
+__pycache__/*
+tiff2fits/__pycache__/*
+tiff2fits.egg-info/*
 examples/*
 converted/*
 *.ipynb
