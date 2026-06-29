@@ -2,7 +2,3 @@ __pycache__/*
 examples/*
 converted/*
 *.ipynb
-*.tiff
-*.tif
-*.fits
-*.fit
