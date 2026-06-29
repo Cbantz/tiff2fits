@@ -1,6 +1,6 @@
 # About
 
-tiff2fits is a tool to convert Tag Image File Format (.tif or .tiff) files to flexible image transport system (.fits) files.
+tiff2fits is a Python/CLI utility to convert Tag Image File Format (.tif or .tiff) files to flexible image transport system (.fits) files.
 
 # Highlights
 
