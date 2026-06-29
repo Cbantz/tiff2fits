@@ -7,7 +7,7 @@ from glob import glob
 
 def convert(tif_path, output_path, header = None, overwrite: bool = False, verbose : bool = False):
     '''
-    Converts a Tag Image File Format (.tif) image to a FITS (.fits) file.
+    Converts a Tag Image File Format (.tif) image to a FITS (.FTS) file.
 
     Arguments:
      tif_path: The path to the Tag Image File Format image you want to convert.
@@ -25,7 +25,7 @@ def convert(tif_path, output_path, header = None, overwrite: bool = False, verbo
             fits.writeto(save_out_path, img_mirror, header=header, overwrite=overwrite)
             if verbose:
                 print(f"Saved conversion of {tif_path} as {save_out_path}")
-            return f"{output_path}/{img_name}.fits"
+            return f"{output_path}/{img_name}.FTS"
 
 def __get_save_out_path__(output_path, img_name):
 
@@ -35,7 +35,7 @@ def __get_save_out_path__(output_path, img_name):
     if Path(output_path).is_file():
         save_out_path = f"{output_path}"
     elif Path(output_path).is_dir():
-        save_out_path = f"{output_path}/{img_name}.fits"
+        save_out_path = f"{output_path}/{img_name}.FTS"
 
     else:
         print("Not a usable output_path.")
@@ -48,7 +48,7 @@ def __get_save_out_path__(output_path, img_name):
 def __get_args__():
     parser = argparse.ArgumentParser(
     prog='tif2FITS',
-    description='Converts .tif files to .fits files'
+    description='Converts .tif files to .FTS files'
 
     )
     parser.add_argument('input_path')
