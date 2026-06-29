@@ -1,6 +1,6 @@
 # About
 
-tiff2fits is a Python/CLI utility to convert Tag Image File Format (.tif or .tiff) files to flexible image transport system (.fits) files.
+tiff2fits is a Python/CLI utility to convert Tag Image File Format (.tif or .tiff) files to flexible image transport system (.FTS) files.
 
 # Highlights
 
@@ -22,7 +22,7 @@ Using the CLI takes a basic command structure:
 `tiff2fits [input_path] [output_path] [args]`
 
 - \[input_path\] is a path to either a .tiff file or a directory containing .tiff files that you wish to be converted.
-- \[output_path\] is the location you wish the .fits file to be saved. It can be either a directory (recommended) or a file path.
+- \[output_path\] is the location you wish the .FTS file to be saved. It can be either a directory (recommended) or a file path.
 - \[args\]
     - \--overwrite will overwrite any existing files with the same name in an output path when saving your converted files.
     - \--verbose will print confirmations of each image as it is converted and saved.
@@ -30,8 +30,8 @@ Using the CLI takes a basic command structure:
 **NOTES:**
 
 - Currently, if given a directory as an \[input_path\], the CLI will convert all .tiff files in said directory.
-- If a directory is given for the \[output_path\], files will be saved as their original name but with .fits instead of .tiff
-    - e.g. input_path/image.tiff -> output_path/image.fits
+- If a directory is given for the \[output_path\], files will be saved as their original name but with .FTS instead of .tiff
+    - e.g. input_path/image.tiff -> output_path/image.FTS
 - You will get an error if you try to overwrite without using the overwrite flag.
 
 ## Using Python Package
