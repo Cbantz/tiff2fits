@@ -26,10 +26,13 @@ Using the CLI takes a basic command structure:
 - \[args\]
     - \--overwrite will overwrite any existing files with the same name in an output path when saving your converted files.
     - \--verbose will print confirmations of each image as it is converted and saved.
+    - \--compress is on by default but can be set to False if desired. It will save a lossless compression algorithm to save storage space, but has the effect saving in the 1st rather than in the 0th index of the HDU List.
+
 
 **NOTES:**
 
 - Currently, if given a directory as an \[input_path\], the CLI will convert all .tiff files in said directory.
+- Cannot currently save both a compressed version and uncompressed in the same HDU List.
 - If a directory is given for the \[output_path\], files will be saved as their original name but with .FTS instead of .tiff
     - e.g. input_path/image.tiff -> output_path/image.FTS
 - You will get an error if you try to overwrite without using the overwrite flag.
@@ -38,7 +41,7 @@ Using the CLI takes a basic command structure:
 
 tiff2fits can be imported into your project using
 
-`import tiff2fits`.
+`from tiff2fits import tiff2fits`.
 
 The only function you are likely to use is tiff2fits.convert().
 

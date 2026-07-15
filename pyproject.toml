@@ -9,7 +9,7 @@ include = ["tiff2fits*"]
 requires-python = ">=3.8"
 name = "tiff2fits"
 description = "Converts grayscale Tag Image File Format (.tif or .tiff) files to flexible image transport system (.fits) files."
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
     "astropy>=7.1.0",
     "numpy>=2.4.6",
