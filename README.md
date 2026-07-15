@@ -13,6 +13,10 @@ tiff2fits can be installed from this repo using pip.
 
 `pip install git+https://github.com/Cbantz/tiff2FITS.git`
 
+or updated using:
+
+`pip install --upgrade --force-reinstall git+https://github.com/Cbantz/tiff2FITS.git`.
+
 After installation, you can use tiff2fits as a command line interface (CLI) or as a python package.
 
 ## Using CLI
