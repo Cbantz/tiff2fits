@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse
 from glob import glob
 
-def convert(tif_path, output_path, header = None, overwrite: bool = False, verbose : bool = False):
+def convert(tif_path, output_path, header = None, overwrite: bool = False, verbose : bool = False, compress = True):
     '''
     Converts a Tag Image File Format (.tif) image to a FITS (.FTS) file.
 
@@ -21,11 +21,21 @@ def convert(tif_path, output_path, header = None, overwrite: bool = False, verbo
         img_array = np.array(img)
         img_mirror = np.flipud(img_array) #PIL loads upside down by default. Flipping gives original orientation.
         save_out_path = __get_save_out_path__(output_path=output_path, img_name=img_name)
-        if save_out_path:
-            fits.writeto(save_out_path, img_mirror, header=header, overwrite=overwrite)
-            if verbose:
-                print(f"Saved conversion of {tif_path} as {save_out_path}")
-            return f"{output_path}/{img_name}.FTS"
+
+
+        
+        fits.HDUList([fits.PrimaryHDU(header=header, data=img_mirror if compress==False else None), _compress_(img_mirror, "RICE_1") if compress else None]).writeto(save_out_path, overwrite=overwrite)
+
+        # if save_out_path:
+        #     fits.writeto(save_out_path, compressed, header=header, overwrite=overwrite)
+        #     if verbose:
+        #         print(f"Saved conversion of {tif_path} as {save_out_path}")
+        return f"{output_path}/{img_name}.FTS"
+    
+def _compress_(data : np.ndarray, algorithm : str):
+    compressed = fits.CompImageHDU(data=data, compression_type=algorithm)
+    return compressed
+
 
 def __get_save_out_path__(output_path, img_name):
 
@@ -56,6 +66,7 @@ def __get_args__():
     parser.add_argument('-o', '--overwrite', action='store_true')
     parser.add_argument('-y', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('--compress', action=argparse.BooleanOptionalAction, default=True, help="Enable or disable FITS compression via RICE1 algorithm.")
 
 
     args = parser.parse_args()
@@ -63,7 +74,7 @@ def __get_args__():
 
 def __try_convert__(file, op, args):
     try: 
-        convert(file, op, header=None, overwrite=args.overwrite, verbose=args.verbose)
+        convert(file, op, header=None, overwrite=args.overwrite, verbose=args.verbose, compress=args.compress)
     except Exception as e:
         print(e)
     return

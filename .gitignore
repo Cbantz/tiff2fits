@@ -8,3 +8,4 @@ converted/*
 *.tif
 *.fits
 *.fit
+data/*
