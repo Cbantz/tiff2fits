@@ -47,9 +47,9 @@ tiff2fits can be imported into your project using
 
 `from tiff2fits import tiff2fits`.
 
-The only function you are likely to use is tiff2fits.convert().
+The only functions you are likely to use are tiff2fits.convert() and tiff2fits.convert_dir().
 
-This function, much like the CLI, takes arguments for tiff_path, output_path, overwrite, and verbose. For example,
+These functions, much like the CLI, takes arguments for tiff_path (or dir_path), output_path (or output_dir), overwrite, verbose, and compress. For example,
 
 `tiff2fits.convert("path/to/tiff.tiff", "my_converted_files", header=my_header, overwrite = True)`
 

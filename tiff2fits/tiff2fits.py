@@ -14,10 +14,15 @@ def convert(tif_path, output_path, header = None, overwrite: bool = False, verbo
      output_path: The path to the file or directory you want to save the created FITS image in.
      headers (optional): astropy.io.fits.header.header() object to use as the header of the new FITS file.
     '''
+    ip = Path(tif_path)
+    if ip.is_dir():
+        print("You passed a directory to convert() which only takes files. Please use convert_dir() or pass a file.")
+        return
+    
     if verbose:
         print(f"Attempting to convert {tif_path}")
     with Image.open(tif_path) as img:
-        img_name = Path(tif_path).stem
+        img_name = ip.stem
         img_array = np.array(img)
         img_mirror = np.flipud(img_array) #PIL loads upside down by default. Flipping gives original orientation.
         save_out_path = __get_save_out_path__(output_path=output_path, img_name=img_name)
@@ -31,6 +36,19 @@ def convert(tif_path, output_path, header = None, overwrite: bool = False, verbo
         #     if verbose:
         #         print(f"Saved conversion of {tif_path} as {save_out_path}")
         return f"{output_path}/{img_name}.FTS"
+
+def convert_dir(dir_path, output_dir, overwrite: bool = False, verbose: bool = False, compress: bool = True):
+    ip = Path(dir_path)
+    op = Path(output_dir)
+    if not ip.is_dir():
+        print("You have not passed a valid directory to convert_dir().")
+    if not op.is_dir(): #Prevents writing over same file repeatedly. Unnecessary error if really only 1 file in directory to convert but in that case user should just pass file name.
+        print("You must pass an existing directory as your output.") #Existing because not including a file extension doesn't make a directory.
+        return
+    tif_file_list = glob(f"{ip}/*.tif")
+    tif_file_list += glob(f"{ip}/*.tiff")
+    for file in tif_file_list:
+        convert(file, output_dir, overwrite=overwrite, verbose=verbose, compress=compress)
     
 def _compress_(data : np.ndarray, algorithm : str):
     compressed = fits.CompImageHDU(data=data, compression_type=algorithm)
