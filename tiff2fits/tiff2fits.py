@@ -49,6 +49,7 @@ def convert_dir(dir_path, output_dir, overwrite: bool = False, verbose: bool = F
     tif_file_list += glob(f"{ip}/*.tiff")
     for file in tif_file_list:
         convert(file, output_dir, overwrite=overwrite, verbose=verbose, compress=compress)
+    return output_dir
     
 def _compress_(data : np.ndarray, algorithm : str):
     compressed = fits.CompImageHDU(data=data, compression_type=algorithm)
